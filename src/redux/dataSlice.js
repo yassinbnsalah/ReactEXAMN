@@ -20,6 +20,9 @@ const DataSlice = createSlice({
     },
     populateData(state, action) {
       state.Data = action.payload;
+      state.Data.forEach((element)=>{
+        element.rate = 0
+      })
     },
     selectData(state, action) {
       state.selectedData = action.payload;
@@ -34,11 +37,18 @@ const DataSlice = createSlice({
       const payload = action.payload;
       state.Data = state.Data.filter((DataItem) => DataItem.id !== payload.id);
     },
+    selectOneData: (state, action) => {
+      const payload = action.payload;
+      state.selectedData = state.Data.filter((DataItem) => DataItem.id === payload.id);
+    },
     updateDataReducer: (state, action) => {
       const payload = action.payload;
       const index = state.Data.findIndex((item) => item.id === payload.id);
       if (index !== -1) {
         state.Data[index] = payload;
+      }
+      if (payload.rate>4.5) {
+        alert("Propriété Excellente ! ")
       }
     },
     addDataReducer: (state, action) => {
@@ -74,12 +84,13 @@ export const decrementalLike = (state) => async (dispatch) => {
     dispatch(setErrors(error));
   }
 };
+
 // Tjiblek mel base de données les données w thothomlek fel Redux
 export const fetchData = () => async (dispatch) => {
   try {
     const DataResult = await getAlldata();
     dispatch(populateData(DataResult.data));
-    dispatch(setErrors(null));
+   
   } catch (error) {
     dispatch(setErrors(error));
   }
@@ -115,6 +126,7 @@ export const selectedData = (state) => {
 export const {
   incLikes,
   decLikes,
+  selectOneData,
   populateData,
   selectData,
   unselectData,
