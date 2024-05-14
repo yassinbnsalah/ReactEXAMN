@@ -6,19 +6,15 @@
       "adress": "456 Chemin des Fleurs",
       "price": 250,
       "available": true,
-      "vue_number": 4,
-      "rate": 0,
-      "nbRater": 0
+      "vue_number": 4
     },
     {
       "id": "2",
       "name": "Studio en centre-ville",
       "adress": "789 Avenue du Centre",
       "price": 800,
-      "available": false,
-      "vue_number": 3,
-      "rate": 8.833333333333334,
-      "nbRater": 3
+      "available": true,
+      "vue_number": 3
     }
   ]
 }

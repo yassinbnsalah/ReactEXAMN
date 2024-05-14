@@ -42,7 +42,8 @@ const DataSlice = createSlice({
       state.selectedData = state.Data.filter((DataItem) => DataItem.id === payload.id);
     },
     updateDataReducer: (state, action) => {
-      const payload = action.payload;
+      let payload = action.payload;
+      payload.rate = payload.newRater  ;
       const index = state.Data.findIndex((item) => item.id === payload.id);
       if (index !== -1) {
         state.Data[index] = payload;

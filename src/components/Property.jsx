@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { updateDataReducer } from '../redux/dataSlice';
+import { UpdateDataRating } from '../service/crud';
 
 function Property({data}) {
     const [visible , setVisible ] = useState(true)
@@ -14,6 +15,7 @@ function Property({data}) {
     const navigate = useNavigate();
     const UpdateData = async () => {
         try {
+
             data.vue_number = data.vue_number+1 
             const response = await axios.put("http://localhost:3001/data/"+data.id , data);
             console.log("Data updated succeffully");
@@ -21,14 +23,14 @@ function Property({data}) {
             console.error("Error fetching data:", error);
           }
       };
+      
     const GoToReservationPage = () =>{
         UpdateData();
         navigate("/reserve/"+data.id)
     }
     const Ratingg = () =>{
         console.log(rate);
-        console.log(data.rate);
-        data.rate = data.rate + rate
+        UpdateDataRating(data, rate)
         dispatch(updateDataReducer(data))
     }
   return (

@@ -52,7 +52,7 @@ function Properties() {
       ) : (
         <>
           {" "}
-          {Data?.map((item, index) => (
+          {proprietes?.map((item, index) => (
             <Property data={item} key={index}></Property>
           ))}
         </>
